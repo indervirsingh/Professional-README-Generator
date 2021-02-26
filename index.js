@@ -2,6 +2,8 @@
 Variables ------------------------------------------------------------------------------*/
     const inquirer = require('inquirer');
     const fs = require('fs');
+    var title, tableOfContents, description, usage, license, badge, installation, collaborators, github, email, tests, questions;
+    var readmeContent;
 //
 
 
@@ -9,7 +11,7 @@ Variables ----------------------------------------------------------------------
 /* 
 Functions ------------------------------------------------------------------------------*/
 
-    // - Initalize the app
+    // - Initialize the app
     const init = () => {
         promptUser()
             .then(writeToFile('README.md', generateMarkdown(answers)));
@@ -100,7 +102,21 @@ Functions ----------------------------------------------------------------------
 
     // - Generate the README.md file
     const generateMarkdown = (answers) => {
-        return `# ${answers.title}`;
+        title = `# ${answers.title}`; 
+        description = `### Description <br> ${answers.description}`;
+        installation = `### Installation Instructions <br> ${answers.installationInstructions}`;
+        usage = `### Usage Guidelines <br> ${answers.usageInstructions}`;
+        license = `### License For Project <br> ${answers.license}`;
+        github = `### GitHub Profile <br> ${answers.github}`;
+        email = `### Email Address <br> ${answers.email}`;
+
+        // Needs to be parsed properly: [GitHub_username](link_to_GitHub)
+        collaborators = `${answers.collaborators}`;
+
+        // Needs to be parsed properly: [test_name](test_link)
+        tests = `${answers.tests}`;
+
+        return readmeContent;
     };
 
 //
