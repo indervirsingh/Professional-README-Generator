@@ -11,12 +11,8 @@ Functions ----------------------------------------------------------------------
 
     // - Initalize the app
     const init = () => {
-
-        // First get the user's details
         promptUser()
-            .then(writeToFile('README.md', generateMarkdown(answers)))
-            .then(() => console.log('Congrats! A README.md file has been generated.'))
-            .catch((error) => console.log(error));
+            .then(writeToFile('README.md', generateMarkdown(answers)));
     };
 
     // - Prompt for the README.md generator
@@ -85,6 +81,9 @@ Functions ----------------------------------------------------------------------
 
     // - Write the README.md file
     const writeToFile = (fileName, data) => {
+        fs.writeFile(fileName, data, (error) =>
+            error ? console.log(error) : console.log('Congrats! A README.md file for your project has been generated.')
+        );
     };
 
     // - Create the license section
@@ -100,8 +99,8 @@ Functions ----------------------------------------------------------------------
     };
 
     // - Generate the README.md file
-    const generateMarkdown = (data) => {
-        return `# ${data.title}`;
+    const generateMarkdown = (answers) => {
+        return `# ${answers.title}`;
     };
 
 //
