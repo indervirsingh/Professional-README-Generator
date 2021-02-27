@@ -2,8 +2,7 @@
 Variables ------------------------------------------------------------------------------*/
     const inquirer = require('inquirer');
     const fs = require('fs');
-    var title, tableOfContents, description, usage, license, badge, installation, collaborators, github, email, tests, questions;
-    var readmeContent;
+    let badge;
 //
 
 
@@ -29,12 +28,6 @@ Functions ----------------------------------------------------------------------
                 type: 'input',
                 name: 'description',
                 message: 'Please enter a Description for your project :'
-            },
-            {
-                type: 'list',
-                name: 'tableOfContentsConfirm',
-                message: 'Would you like to include a Table of Contents? (OPTIONAL)',
-                choices: ['Yes', 'No']
             },
             {
                 type: 'input',
@@ -88,33 +81,85 @@ Functions ----------------------------------------------------------------------
         );
     };
 
-    // - Create the license section
-    const renderLicenseSection = (license) => {
-    };
-
-    // - Create the license link
-    const renderLicenseLink = (license) => {
-    };
-
     // - Create license badge
     const renderLicenseBadge = (license) => {
+        switch (license) {
+            case 'GNU AGPLv3':
+                badge = `[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)`;
+                break;
+            case 'GNU GPLv3':
+                badge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`;
+                break;
+            case 'GNU LGPLv3':
+                badge = `[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)`;
+                break;
+            case 'Mozilla Public License 2.0':
+                badge = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`;
+                break;
+            case 'Apache License 2.0':
+                badge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
+                break;
+            case 'Boost Software License 1.0':
+                badge = `[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`;
+                break;
+            case 'The Unlicense':
+                badge = `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`;
+                break;
+            case 'MIT License':
+                badge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+                break;
+            default:
+                badge = '';
+        };
+
     };
 
     // - Generate the README.md file
     const generateMarkdown = (answers) => {
-        title = `# ${answers.title}`; 
-        description = `### Description <br> ${answers.description}`;
-        installation = `### Installation Instructions <br> ${answers.installationInstructions}`;
-        usage = `### Usage Guidelines <br> ${answers.usageInstructions}`;
-        license = `### License For Project <br> ${answers.license}`;
-        github = `### GitHub Profile <br> ${answers.github}`;
-        email = `### Email Address <br> ${answers.email}`;
+
+        // Create the badge for the license
+        renderLicenseBadge(answers.license);
 
         // Needs to be parsed properly: [GitHub_username](link_to_GitHub)
-        collaborators = `${answers.collaborators}`;
+        let collaborators = `${answers.collaborators}`;
 
         // Needs to be parsed properly: [test_name](test_link)
-        tests = `${answers.tests}`;
+        let tests = `${answers.tests}`;
+
+        let readmeContent = `
+        # ${answers.title}
+
+        ## Description
+        ${answers.description}
+
+        ## Table of Contents
+        * [Installation](#installation)
+        * [Usage](#usage)
+        * [Collaborators](#collaborators)
+        * [Testing](#testing)
+        * [License](#license)
+        * [Questions](#questions)
+
+        ## Installation
+        ${answers.installationInstructions}
+
+        ## Usage
+        ${answers.usageInstructions}
+
+        ## Collaborators
+        ${answers.collaborators}
+
+        ## Testing
+        ${answers.tests}
+
+        ## License 
+        Licensed under ${answers.license}
+
+        ## Questions
+        If you have questions regarding this project, please contact me through email at ${answers.email}
+
+
+        `;
 
         return readmeContent;
     };
