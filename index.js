@@ -125,10 +125,15 @@ Functions ----------------------------------------------------------------------
         let collaborators = `${answers.collaborators}`;
 
         // Needs to be parsed properly: [test_name](test_link)
-        let tests = `${answers.tests}`;
+        if (answers.testConfirm === 'Yes') {
+            let tests = `${answers.tests}`;
+        }
+        else {
+            let tests = ' ';
+        }
 
 
-        let readmeContent = `# ${answers.title}${space}${space}## Description${space}${answers.description}${space}${space}## Table of Contents${space}* [Installation](#installation)${space}* [Usage](#usage)${space}* [Collaborators](#collaborators)${space}* [Testing](#testing)${space}* [License](#license)${space}* [Questions](#questions)${space}${space}## Installation${space}${answers.installationInstructions}${space}## Usage${space}${answers.usageInstructions}${space}${space}## Collaborators${space}${collaborators}${space}${space}## Testing${space}${answers.tests}${space}${space}## License${space}Licensed under ${badge}${space}${answers.license}${space}${space}## Questions${space}If you have questions regarding this project, please contact me through email at ${answers.email}`;
+        let readmeContent = `# ${answers.title}${space}${space}## Description${space}${answers.description}${space}${space}## Table of Contents${space}* [Installation](#installation)${space}* [Usage](#usage)${space}* [Collaborators](#collaborators)${space}* [Testing](#testing)${space}* [License](#license)${space}* [Questions](#questions)${space}${space}## Installation${space}${answers.installationInstructions}${space}## Usage${space}${answers.usageInstructions}${space}${space}## Collaborators${space}${collaborators}${space}${space}## Testing${space}${tests}${space}${space}## License${space}Licensed under ${badge}${space}${answers.license}${space}${space}## Questions${space}If you have questions regarding this project, please contact me through email at ${answers.email}`;
         return readmeContent;
     };
 
