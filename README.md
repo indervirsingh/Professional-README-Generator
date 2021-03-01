@@ -23,6 +23,7 @@ My recommendations are pretty self-explanatory, use this program to quickly crea
 
 ## License
 Licensed under The Unlicense
+
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
 ## Questions
