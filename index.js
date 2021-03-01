@@ -2,6 +2,9 @@
 Variables ------------------------------------------------------------------------------*/
     const inquirer = require('inquirer');
     const fs = require('fs');
+    const util = require('util');
+    const space = `
+`;
     let badge;
 //
 
@@ -13,8 +16,13 @@ Functions ----------------------------------------------------------------------
     // - Initialize the app
     const init = () => {
         promptUser()
-            .then(writeToFile('README.md', generateMarkdown(answers)));
+            .then(answers => writeFileAsync('README.md', generateMarkdown(answers)))
+            .then(() => console.log('Congrats! A README.md file for your project has been generated.'))
+            .catch(error => console.error(error));
     };
+
+    // Create writeFile function using promises instead of a callback function
+    const writeFileAsync = util.promisify(fs.writeFile);
 
     // - Prompt for the README.md generator
     const promptUser = () => {
@@ -74,13 +82,6 @@ Functions ----------------------------------------------------------------------
         ]);
     };
 
-    // - Write the README.md file
-    const writeToFile = (fileName, data) => {
-        fs.writeFile(fileName, data, (error) =>
-            error ? console.log(error) : console.log('Congrats! A README.md file for your project has been generated.')
-        );
-    };
-
     // - Create license badge
     const renderLicenseBadge = (license) => {
         switch (license) {
@@ -126,41 +127,8 @@ Functions ----------------------------------------------------------------------
         // Needs to be parsed properly: [test_name](test_link)
         let tests = `${answers.tests}`;
 
-        let readmeContent = `
-        # ${answers.title}
 
-        ## Description
-        ${answers.description}
-
-        ## Table of Contents
-        * [Installation](#installation)
-        * [Usage](#usage)
-        * [Collaborators](#collaborators)
-        * [Testing](#testing)
-        * [License](#license)
-        * [Questions](#questions)
-
-        ## Installation
-        ${answers.installationInstructions}
-
-        ## Usage
-        ${answers.usageInstructions}
-
-        ## Collaborators
-        ${answers.collaborators}
-
-        ## Testing
-        ${answers.tests}
-
-        ## License 
-        Licensed under ${answers.license}
-
-        ## Questions
-        If you have questions regarding this project, please contact me through email at ${answers.email}
-
-
-        `;
-
+        let readmeContent = `# ${answers.title}${space}${space}## Description${space}${answers.description}${space}${space}## Table of Contents${space}* [Installation](#installation)${space}* [Usage](#usage)${space}* [Collaborators](#collaborators)${space}* [Testing](#testing)${space}* [License](#license)${space}* [Questions](#questions)${space}${space}## Installation${space}${answers.installationInstructions}${space}## Usage${space}${answers.usageInstructions}${space}${space}## Collaborators${space}${collaborators}${space}${space}## Testing${space}${answers.tests}${space}${space}## License${space}Licensed under ${badge}${space}${answers.license}${space}${space}## Questions${space}If you have questions regarding this project, please contact me through email at ${answers.email}`;
         return readmeContent;
     };
 
