@@ -130,7 +130,7 @@ Functions ----------------------------------------------------------------------
         }
 
 
-        let readmeContent = `# ${answers.title}${space}${space}## Description${space}${answers.description}${space}${space}## Table of Contents${space}* [Installation](#installation)${space}* [Usage](#usage)${space}* [Collaborators](#collaborators)${space}* [Testing](#testing)${space}* [License](#license)${space}* [Questions](#questions)${space}${space}## Installation${space}${answers.installationInstructions}${space}## Usage${space}${answers.usageInstructions}${space}${space}## Collaborators${space}${collaborators}${space}${space}## Testing${space}${answers.tests}${space}${space}## License${space}Licensed under ${answers.license}${space}${badge}${space}${space}## Questions${space}If you have questions regarding this project, please contact me through email at ${answers.email}`;
+        let readmeContent = `# ${answers.title}${space}${space}## Description${space}${answers.description}${space}${space}## Table of Contents${space}* [Installation](#installation)${space}* [Usage](#usage)${space}* [Collaborators](#collaborators)${space}* [Testing](#testing)${space}* [License](#license)${space}* [Questions](#questions)${space}${space}## Installation${space}${answers.installationInstructions}${space}## Usage${space}${answers.usageInstructions}${space}${space}## Collaborators${space}${collaborators}${space}${space}## Testing${space}${answers.tests}${space}${space}## License${space}Licensed under ${answers.license}${space}${space}${badge}${space}${space}## Questions${space}If you have questions regarding this project, please contact me through email at ${answers.email}`;
         return readmeContent;
     };
 
