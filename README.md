@@ -27,4 +27,4 @@ Licensed under The Unlicense
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
 ## Questions
-If you have questions regarding this project, please contact me through email at iindervirsingh@gmail.com
+If you have questions regarding this project, please contact me through email at indervirsingh.software@gmail.com
