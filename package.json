@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/indervirsingh/Professional-README-Generator#readme",
   "dependencies": {
-    "inquirer": "^12.1.0"
+    "inquirer": "^12.3.3"
   }
 }
